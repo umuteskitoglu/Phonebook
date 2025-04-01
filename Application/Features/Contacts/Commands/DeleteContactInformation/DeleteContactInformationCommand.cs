@@ -9,11 +9,11 @@ namespace Application.Features.Contacts.Commands.DeleteContactInformation
         public Guid ContactInformationId { get; set; }
     }
 
-    public class RemoveContactInformationCommandHandler : IRequestHandler<DeleteContactInformationCommand, Result>
+    public class DeleteContactInformationCommandHandler : IRequestHandler<DeleteContactInformationCommand, Result>
     {
         private readonly IPhonebookDbContext _context;
 
-        public RemoveContactInformationCommandHandler(IPhonebookDbContext context)
+        public DeleteContactInformationCommandHandler(IPhonebookDbContext context)
         {
             _context = context;
         }
