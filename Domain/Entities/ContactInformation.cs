@@ -8,7 +8,7 @@ namespace Domain.Entities
         public Guid ContactId { get; set; }
         public Contact Contact { get; set; } = null!;
         public InformationType Type { get; set; }
-        public string InformationContent { get; set; } = string.Empty;
+        public required string InformationContent { get; set; }
     }
 
     public enum InformationType
