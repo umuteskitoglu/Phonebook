@@ -9,7 +9,7 @@ namespace Application.Features.Contacts.Commands.AddContactInformation
     {
         public Guid ContactId { get; set; }
         public InformationType Type { get; set; }
-        public required string InformationContent { get; set; };
+        public required string InformationContent { get; set; }
     }
 
     public class AddContactInformationCommandHandler : IRequestHandler<AddContactInformationCommand, Result<Guid>>
