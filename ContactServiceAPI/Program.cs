@@ -1,5 +1,6 @@
 using Application;
 using Infrastructure;
+using ContactServiceAPI.Middleware;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -34,7 +35,8 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 
-
+// Add exception handler middleware before other middleware
+app.UseExceptionHandlerMiddleware();
 
 app.UseAuthorization();
 

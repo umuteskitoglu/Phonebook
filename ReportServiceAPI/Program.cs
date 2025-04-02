@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Persistence.Data;
+using ReportServiceAPI.Middleware;
 using ReportServiceAPI.Services;
 using System;
 using System.IO;
@@ -37,6 +38,9 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Phonebook Report Service API V1");
     c.RoutePrefix = string.Empty;
 });
+
+// Add exception handler middleware before other middleware
+app.UseExceptionHandlerMiddleware();
 
 app.UseAuthorization();
 
