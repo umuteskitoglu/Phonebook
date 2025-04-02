@@ -2,9 +2,9 @@ name: .NET Tests
 
 on:
   push:
-    branches: [ development ]
+    branches: [main, development]
   pull_request:
-    branches: [ development ]
+    branches: [main, development]
   workflow_dispatch:
 
 jobs:
@@ -12,35 +12,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 9.0.x
-        
-    - name: Restore dependencies
-      run: dotnet restore
-      
-    - name: Build
-      run: dotnet build --no-restore
-      
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-      
-    - name: Generate test coverage report
-      run: dotnet test --no-build --collect:"XPlat Code Coverage"
-      
-    - name: Install ReportGenerator tool
-      run: dotnet tool install -g dotnet-reportgenerator-globaltool
-      
-    - name: Generate coverage report
-      run: reportgenerator -reports:"**/TestResults/**/coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:Html
-      
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-report
-        path: coveragereport
-        retention-days: 7
- 
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
+
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Generate test coverage report
+        run: dotnet test --no-build --collect:"XPlat Code Coverage"
+
+      - name: Install ReportGenerator tool
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      - name: Generate coverage report
+        run: reportgenerator -reports:"**/TestResults/**/coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:Html
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coveragereport
+          retention-days: 7
