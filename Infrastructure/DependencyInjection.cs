@@ -15,15 +15,5 @@ namespace Infrastructure
             services.AddPersistence(configuration);
             return services;
         }
-
-        public static IHost MigrateDatabase(this IHost host)
-        {
-            using (var scope = host.Services.CreateScope())
-            {
-                var dbContext = scope.ServiceProvider.GetRequiredService<PhonebookDbContext>();
-                dbContext.Database.Migrate();
-            }
-            return host;
-        }
     }
 } 
