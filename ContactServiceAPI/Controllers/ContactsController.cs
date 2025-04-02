@@ -4,6 +4,7 @@ using Application.Features.Contacts.Commands.DeleteContact;
 using Application.Features.Contacts.Commands.DeleteContactInformation;
 using Application.Features.Contacts.Queries.GetContactDetails;
 using Application.Features.Contacts.Queries.GetContacts;
+using Application.Features.Reports.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -85,6 +86,23 @@ namespace ContactServiceAPI.Controllers
         public async Task<IActionResult> DeleteContactInformation(DeleteContactInformationCommand command)
         {
             var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+        /// <summary>
+        /// Creates a new report asynchronously.
+        /// </summary>
+        /// <returns>Report ID and status</returns>
+        [HttpPost]
+        public async Task<IActionResult> CreateReport()
+        {
+            var command = new CreateReportCommand();
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return BadRequest(result);
+
             return Ok(result);
         }
     }

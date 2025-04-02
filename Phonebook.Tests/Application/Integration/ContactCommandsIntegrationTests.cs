@@ -112,6 +112,8 @@ namespace Phonebook.Tests.Application.Integration
 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactInformation> ContactInformation { get; set; }
+        public DbSet<Report> Reports { get; set; }
+        public DbSet<ReportDetail> ReportDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

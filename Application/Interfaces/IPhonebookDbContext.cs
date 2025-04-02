@@ -7,6 +7,8 @@ namespace Application.Interfaces
     {
         DbSet<Contact> Contacts { get; set; }
         DbSet<ContactInformation> ContactInformation { get; set; }
+        DbSet<Report> Reports { get; set; }
+        DbSet<ReportDetail> ReportDetails { get; set; }
         
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

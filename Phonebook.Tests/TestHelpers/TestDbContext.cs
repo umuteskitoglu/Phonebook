@@ -12,6 +12,8 @@ namespace Phonebook.Tests.TestHelpers
 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactInformation> ContactInformation { get; set; }
+        public DbSet<Report> Reports { get; set; }
+        public DbSet<ReportDetail> ReportDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,6 +24,14 @@ namespace Phonebook.Tests.TestHelpers
                 .HasOne<Contact>()
                 .WithMany()
                 .HasForeignKey(ci => ci.ContactId);
+
+            modelBuilder.Entity<Report>().HasKey(r => r.Id);
+            modelBuilder.Entity<ReportDetail>().HasKey(rd => rd.Id);
+
+            modelBuilder.Entity<Report>()
+                .HasMany(r => r.Details)
+                .WithOne()
+                .HasForeignKey(rd => rd.ReportId);
         }
     }
-} 
+}

@@ -26,12 +26,15 @@ builder.Services.AddInfrastructure(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.MapOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contact Service API v1"));
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contact Service API v1");
+    c.RoutePrefix = string.Empty;
+});
+
+
 
 app.UseAuthorization();
 

@@ -4,6 +4,9 @@ using Microsoft.Extensions.Hosting;
 using Persistence;
 using Persistence.Data;
 using Microsoft.EntityFrameworkCore;
+using Application.Interfaces;
+using Infrastructure.Messaging;
+using Infrastructure.Services;
 
 namespace Infrastructure
 {
@@ -13,6 +16,14 @@ namespace Infrastructure
         {
             // Register persistence
             services.AddPersistence(configuration);
+            
+            // Register message services
+            services.AddSingleton<IMessageService, RabbitMQService>();
+            services.AddSingleton<IMessageConsumerService, RabbitMQConsumerService>();
+            
+            // Register processing services
+            services.AddScoped<IReportProcessingService, ReportProcessingService>();
+            
             return services;
         }
     }
